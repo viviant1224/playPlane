@@ -203,6 +203,14 @@ var MyLayer = cc.LayerColor.extend({
             // 获得敌机的碰撞矩形
             var targetRect = target.getBoundingBox();
 
+            //add by viviant 160228
+            var planeRect = this.plane.getBoundingBox();
+            if (cc.rectIntersectsRect(targetRect,planeRect)) {
+                var gameOverScene = GameOverScene.create();// 创建结束场景
+                cc.Director.getInstance().replaceScene(cc.TransitionProgressRadialCCW.create(1.2,gameOverScene));  // 场景转换代码
+            }
+            //add by viviant end
+
             var bullets2Delete = [];
             // 对于每个敌机，遍历每个屏幕上的子弹，判断是否碰撞
             for(i in this._bullets){
