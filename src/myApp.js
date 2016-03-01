@@ -80,6 +80,7 @@ var MyLayer = cc.LayerColor.extend({
     plane:null,
     _bullets:null,
     _targets:null,
+    var _score = 0,
 
     init:function () {
         // 1. super init first
@@ -206,6 +207,7 @@ var MyLayer = cc.LayerColor.extend({
             //add by viviant 160228
             var planeRect = this.plane.getBoundingBox();
             if (cc.rectIntersectsRect(targetRect,planeRect)) {
+                alert("score : " + this._score);
                 var gameOverScene = GameOverScene.create();// 创建结束场景
                 cc.Director.getInstance().replaceScene(cc.TransitionProgressRadialCCW.create(1.2,gameOverScene));  // 场景转换代码
             }
@@ -249,6 +251,7 @@ var MyLayer = cc.LayerColor.extend({
             }
 
             this.removeChild(target);
+            this._score = this._score + 10;
         }
 
         targets2Delete = null;
